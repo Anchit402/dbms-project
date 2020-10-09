@@ -1,0 +1,57 @@
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<section class="text-gray-500 bg-gray-900 body-font">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">ITEMS TABLE</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Our Menu Card</p>
+        </div>
+        <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+            <table class="table-auto w-full text-left whitespace-no-wrap">
+            <thead>
+                <tr>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">waiter_id</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">waiter_name</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">dob</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">salary</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">contact</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">age</th>
+                <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <form action="", method="POST">
+                    <tr>
+                        <td class="px-4 py-3"><input type="text" name="waiter_id" size="10" STYLE="background-color: #2D3748;"></td>
+                        <td class="px-4 py-3"><input type="text" name="waiter_name" size="10" STYLE="background-color: #2D3748;"></td>
+                        <td class="px-4 py-3"><input type="date" name="dob" STYLE="background-color: #2D3748 width: 10px;"></td>
+                        <td class="px-4 py-3"><input type="text" name="salary" size="10" STYLE="background-color: #2D3748;"></td>
+                        <td class="px-4 py-3"><input type="text" name="contact" size="10" STYLE="background-color: #2D3748;"></td>
+                        <td class="px-4 py-3"><input type="text" name="age" size="10" STYLE="background-color: #2D3748;" value="AUTO GENERATED"></td>
+                        <input type="submit" value="ADD CHEF" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"></button>
+                    </tr> 
+                </form>
+                {% for i in iteminfo %}
+                    <tr>
+                        <td class="px-4 py-3 text-lg text-white">{{i[0]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[1]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[2]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[3]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[4]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[5]}}</td>
+                    </tr>  
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Got To Order_items
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+            </a>
+            <a href="/"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
+        </div>
+        </div>
+    </section>
+
+

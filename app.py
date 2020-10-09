@@ -14,6 +14,9 @@ app.config['MYSQL_DB'] = db['mysql_db']
 
 mysql = MySQL(app)
 
+count_item = [101]
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -22,7 +25,8 @@ def home():
 def seeitemstable():
     cur = mysql.connection.cursor()
     if(request.method == 'POST'):
-        item_id = request.form['item_id']
+        item_id = 'I'+str(count_item[0])
+        count_item[0] += 1
         itemname = request.form['Itemname']
         price = request.form['price']
         itype = request.form['type']
@@ -32,8 +36,9 @@ def seeitemstable():
         return redirect('/itemtables')
     else:
         results = cur.execute('''SELECT * FROM items ORDER BY type DESC''')
+        count_item[0] = results + 101
         iteminfo = cur.fetchall()
-        return render_template('itemtable.html', iteminfo = iteminfo)
+        return render_template('itemtable.html', iteminfo = iteminfo, item_id = 'I'+str(count_item[0]))
 
 @app.route('/tablestables', methods=['GET', 'POST'])
 def seetablestables():
@@ -74,5 +79,32 @@ def seecheftables():
         results = cur.execute('''SELECT * FROM chef''')
         iteminfo = cur.fetchall()
         return render_template('chef.html', iteminfo = iteminfo)
+
+@app.route('/waitertables', methods=['GET', 'POST'])
+def seewaitertables():
+    cur = mysql.connection.cursor()
+    if(request.method == 'POST'):
+        waiter_id = request.form['waiter_id']
+        waiter_name = request.form['waiter_name']
+        dob = request.form['dob']
+        day = int(dob.split('-')[0])
+        month = int(dob.split('-')[1])
+        year = int(dob.split('-')[2])
+        salary = request.form['salary']
+        contact = request.form['contact']
+        if (datetime.datetime.now().month >= month):
+            age = datetime.datetime.now().year - day
+        else:
+            age = datetime.datetime.now().year - day - 1
+        cur.execute('''INSERT INTO waiter VALUES (%s, %s, %s, %s, %s, %s)''', (waiter_id, waiter_name, str(day)+'-'+str(month)+'-'+str(year), salary, contact, age))
+        mysql.connection.commit()
+        cur.close()
+        return redirect('/waitertables')
+    else:
+        results = cur.execute('''SELECT * FROM waiter''')
+        iteminfo = cur.fetchall()
+        return render_template('waiter.html', iteminfo = iteminfo)
+
+
 if __name__ == '__main__':
     app.run(debug = True)
