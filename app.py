@@ -15,7 +15,9 @@ app.config['MYSQL_DB'] = db['mysql_db']
 mysql = MySQL(app)
 
 count_item = [101]
-
+count_table = [11]
+count_chef = [11]
+count_waiter = [11]
 
 @app.route('/')
 def home():
@@ -44,7 +46,8 @@ def seeitemstable():
 def seetablestables():
     cur = mysql.connection.cursor()
     if(request.method == 'POST'):
-        table_no = request.form['table_no']
+        table_no = 'T'+str(count_table[0])
+        count_table[0] += 1
         seat_capacity = request.form['seat_capacity']
         cur.execute('''INSERT INTO tables VALUES (%s, %s)''', (table_no, seat_capacity))
         mysql.connection.commit()
@@ -52,14 +55,15 @@ def seetablestables():
         return redirect('/tablestables')
     else:
         results = cur.execute('''SELECT * FROM tables''')
+        count_table[0] = results + 11
         iteminfo = cur.fetchall()
-        return render_template('tables.html', iteminfo = iteminfo)
+        return render_template('tables.html', iteminfo = iteminfo, table_no = 'T'+str(count_table[0]))
 
 @app.route('/cheftables', methods=['GET', 'POST'])
 def seecheftables():
     cur = mysql.connection.cursor()
     if(request.method == 'POST'):
-        chef_id = request.form['chef_id']
+        chef_id = 'C'+str(count_chef[0])
         chef_name = request.form['chef_name']
         dob = request.form['dob']
         day = int(dob.split('-')[0])
@@ -77,14 +81,15 @@ def seecheftables():
         return redirect('/cheftables')
     else:
         results = cur.execute('''SELECT * FROM chef''')
+        count_chef[0] = results + 11
         iteminfo = cur.fetchall()
-        return render_template('chef.html', iteminfo = iteminfo)
+        return render_template('chef.html', iteminfo = iteminfo, chef_id = 'C'+str(count_chef[0]))
 
 @app.route('/waitertables', methods=['GET', 'POST'])
 def seewaitertables():
     cur = mysql.connection.cursor()
     if(request.method == 'POST'):
-        waiter_id = request.form['waiter_id']
+        waiter_id = 'W'+str(count_waiter[0])
         waiter_name = request.form['waiter_name']
         dob = request.form['dob']
         day = int(dob.split('-')[0])
@@ -102,8 +107,9 @@ def seewaitertables():
         return redirect('/waitertables')
     else:
         results = cur.execute('''SELECT * FROM waiter''')
+        count_waiter[0] = results + 11
         iteminfo = cur.fetchall()
-        return render_template('waiter.html', iteminfo = iteminfo)
+        return render_template('waiter.html', iteminfo = iteminfo, waiter_id = 'W'+str(count_waiter[0]))
 
 
 if __name__ == '__main__':

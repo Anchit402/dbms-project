@@ -19,9 +19,9 @@
             <tbody>
                 <form action="", method="POST">
                     <tr>
-                        <td class="px-4 py-3"><input type="text" name="item_id" size="10" STYLE="background-color: #2D3748;" value={{item_id}}></td>
-                        <td class="px-4 py-3"><input type="text" name="Itemname" size="10" STYLE="background-color: #2D3748;"></td>
-                        <td class="px-4 py-3"><input type="number" name="price" size="10" STYLE="background-color: #2D3748;"></td>
+                        <td class="px-4 py-3"><input type="text" name="item_id" size="10" STYLE="background-color: #2D3748; color: white;" value={{item_id}}></td>
+                        <td class="px-4 py-3"><input type="text" name="Itemname" size="10" STYLE="background-color: #2D3748; color: white;"></td>
+                        <td class="px-4 py-3"><input type="number" name="price" size="10" STYLE="background-color: #2D3748; color: white;"></td>
                         <td class="px-4 py-3 text-lg text-white">
                             <select name="type" STYLE="background-color: #2D3748;">
                                 <option value="VEG" STYLE="background-color: #2D3748;">VEG</option>
@@ -33,9 +33,9 @@
                 </form>
                 {% for i in iteminfo %}
                     <tr>
-                        <td class="px-4 py-3">{{i[0]}}</td>
-                        <td class="px-4 py-3">{{i[1]}}</td>
-                        <td class="px-4 py-3">{{i[2]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[0]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[1]}}</td>
+                        <td class="px-4 py-3 text-lg text-white">{{i[2]}}</td>
                         <td class="px-4 py-3 text-lg text-white">{{i[3]}}</td>
                         <td class="w-10 text-center">
                             <input name="plan" type="checkbox">
