@@ -18,6 +18,7 @@ count_item = [101]
 count_table = [11]
 count_chef = [11]
 count_waiter = [11]
+item_dict = {}
 
 @app.route('/')
 def home():
@@ -33,6 +34,9 @@ def seeitemstable():
         price = request.form['price']
         itype = request.form['type']
         cur.execute('''INSERT INTO items VALUES (%s, %s, %s, %s)''', (item_id, itemname, price, itype))
+        item_dict.update({
+            item_id: itemname
+        })
         mysql.connection.commit()
         cur.close()
         return redirect('/itemtables')
