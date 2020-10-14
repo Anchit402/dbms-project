@@ -1,0 +1,41 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 8,
+            "database": "res",
+            "dialect": "MySQL",
+            "name": "root",
+            "password": "guitar2012",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        },
+        {
+            "database": "res",
+            "dialect": "MySQL",
+            "name": "root",
+            "password": "guitar2012",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        },
+        {
+            "database": "res",
+            "dialect": "MySQL",
+            "name": "connect",
+            "password": "guitar2012",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        },
+        {
+            "database": "res",
+            "dialect": "MySQL",
+            "name": "cat2",
+            "password": "guitar2012",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}

@@ -18,7 +18,6 @@ count_item = [101]
 count_table = [11]
 count_chef = [11]
 count_waiter = [11]
-item_dict = {}
 
 @app.route('/')
 def home():
@@ -34,9 +33,6 @@ def seeitemstable():
         price = request.form['price']
         itype = request.form['type']
         cur.execute('''INSERT INTO items VALUES (%s, %s, %s, %s)''', (item_id, itemname, price, itype))
-        item_dict.update({
-            item_id: itemname
-        })
         mysql.connection.commit()
         cur.close()
         return redirect('/itemtables')
@@ -45,6 +41,29 @@ def seeitemstable():
         count_item[0] = results + 101
         iteminfo = cur.fetchall()
         return render_template('itemtable.html', iteminfo = iteminfo, item_id = 'I'+str(count_item[0]))
+
+@app.route('/orderitemtables', methods=['GET', 'POST'])
+def seeorderitemstable():
+    cur = mysql.connection.cursor() 
+    if(request.method == 'POST'):
+        order_id = request.form['order_id']
+        iname = request.form['itemname']
+        cur.execute('''SELECT item_id from items where itemname = "%s"''' % (iname))
+        item_id = cur.fetchall()[0]
+        quantity = request.form['quantity']
+        cur.execute('''SELECT price FROM items WHERE itemname = "%s"''' % (iname))
+        t_price = int(quantity) * int(cur.fetchall()[0][0])
+        cur.execute('''INSERT INTO order_item VALUES (%s, %s, %s, %s)''', (order_id, item_id, quantity, t_price))
+        mysql.connection.commit()
+        cur.close()
+        return redirect('/orderitemtables')
+    else:
+        results = cur.execute('''SELECT * FROM order_item''')
+        count_item[0] = results + 101
+        iteminfo = cur.fetchall()
+        results = cur.execute('''SELECT itemname FROM items''')
+        item_names = cur.fetchall()
+        return render_template('orderitems.html', iteminfo = iteminfo, item_names = (item_names))
 
 @app.route('/tablestables', methods=['GET', 'POST'])
 def seetablestables():
