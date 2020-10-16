@@ -48,7 +48,7 @@ def seeitemstable():
 def seeorderitemstable():
     cur = mysql.connection.cursor() 
     if(request.method == 'POST'):
-        if(request.form['ordersub'] == 'ADD THIS TO ORDER'):
+        if(request.form['ordersub'] == "ADD THIS TO ORDER"):
             order_id = request.form['order_id']
             table_no = request.form['table_no']
             chef_id = request.form['chef_id']
@@ -58,7 +58,7 @@ def seeorderitemstable():
             mysql.connection.commit()
             cur.close()
             return redirect('/orderitemtables')
-        elif(request.form['order_itemssub'] == 'ADD THIS TO ORDER'):
+        if(request.form['ordersub'] == "ADD THIS TO ORDER_ITEMS"):
             order_id = 'OI'+str(count_order[0])
             iname = request.form['itemname']
             cur.execute('''SELECT item_id from items where itemname = "%s"''' % (iname))
