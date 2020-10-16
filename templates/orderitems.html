@@ -9,17 +9,17 @@
             <table class="table-auto w-full text-left whitespace-no-wrap">
             <thead>
                 <tr>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Order_id</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Item_id</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Quantity</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Total Price</th>
-                <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Order_id</th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Item_id</th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Quantity</th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Total Price</th>
+                    <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
                 </tr>
             </thead>
             <tbody>
                 <form action="", method="POST">
                     <tr>
-                        <td class="px-4 py-3"><input type="text" name="order_id" size="10" STYLE="background-color: #2D3748; color: white;"></td>
+                        <td class="px-4 py-3"><input type="text" name="order_id" value="{{order_id}}" size="10" STYLE="background-color: #2D3748; color: white;"></td>
                         <td class="px-4 py-3 text-lg text-white">
                             <select name="itemname" STYLE="background-color: #2D3748;">
                                 {% for item_name in item_names %}
@@ -27,9 +27,17 @@
                                 {% endfor %}
                             </select>
                         </td>
-                        <td class="px-4 py-3"><input type="number" name="quantity" size="10" STYLE="background-color: #2D3748; color: white;"></td>
-                        <td class="px-4 py-3"><input type="number" name="t_price" size="10" STYLE="background-color: #2D3748; color: white;"></td>
-                        <input type="submit" value="ADD THIS TO ORDER" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"></button>
+                        <td class="px-4 py-3"><input type="number" name="quantity" value="1" size="10" STYLE="background-color: #2D3748; color: white;"></td>
+                        <td class="px-4 py-3"><input type="text" name="t_price"  value="AUTO" size="10" STYLE="background-color: #2D3748; color: white;"></td>
+                        <input type="submit" value="ADD THIS TO ORDER_ITEMS" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" name="order_itemssub"></button>
+                    </tr> 
+                    <tr>
+                        <td class="px-4 py-3"><input type="text" name="order_id" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="order_id"></td>
+                        <td class="px-4 py-3"><input type="text" name="table_no" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="table_no"></td>
+                        <td class="px-4 py-3"><input type="text" name="chef_id" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="chef_id"></td>  
+                        <td class="px-4 py-3"><input type="text" name="waiter_id" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="waiter_id"></td>
+                        <td class="px-4 py-3"><input type="text" name="amount" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="Amount"></td>
+                        <input type="submit" value="ADD THIS TO ORDER" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" name="ordersub"></button>
                     </tr> 
                 </form>
                 {% for i in iteminfo %}
@@ -38,11 +46,9 @@
                         <td class="px-4 py-3 text-lg text-white">{{i[1]}}</td>
                         <td class="px-4 py-3 text-lg text-white">{{i[2]}}</td>
                         <td class="px-4 py-3 text-lg text-white">{{i[3]}}</td>
-                        <form action="" method="POST">
-                            <td class="w-10 text-center">
-                                <input name="check" type="checkbox">
-                            </td>
-                        </form>
+                        <td class="w-10 text-center">
+                            <input name="check" type="checkbox">
+                        </td>
                     </tr>  
                 {% endfor %}
             </tbody>

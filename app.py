@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 import datetime
 import yaml
@@ -18,6 +18,8 @@ count_item = [101]
 count_table = [11]
 count_chef = [11]
 count_waiter = [11]
+count_order = [11]
+price = [0]
 
 @app.route('/')
 def home():
@@ -46,24 +48,36 @@ def seeitemstable():
 def seeorderitemstable():
     cur = mysql.connection.cursor() 
     if(request.method == 'POST'):
-        order_id = request.form['order_id']
-        iname = request.form['itemname']
-        cur.execute('''SELECT item_id from items where itemname = "%s"''' % (iname))
-        item_id = cur.fetchall()[0]
-        quantity = request.form['quantity']
-        cur.execute('''SELECT price FROM items WHERE itemname = "%s"''' % (iname))
-        t_price = int(quantity) * int(cur.fetchall()[0][0])
-        cur.execute('''INSERT INTO order_item VALUES (%s, %s, %s, %s)''', (order_id, item_id, quantity, t_price))
-        mysql.connection.commit()
-        cur.close()
-        return redirect('/orderitemtables')
+        if('ADD THIS TO ORDER' in request.form):
+            order_id = request.form['order_id']
+            table_no = request.form['table_no']
+            chef_id = request.form['chef_id']
+            waiter_id = request.form['waiter_id']
+            amount = request.form['amount']
+            cur.execute('''INSERT INTO orders VALUES (%s, %s, %s, %s,  %s)''', (order_id, table_no, chef_id, waiter_id, amount))
+            mysql.connection.commit()
+            cur.close()
+            return redirect('/orderitemtables')
+        elif('ADD THIS TO ORDER_ITEMS' in request.form):
+            order_id = 'OI'+str(count_order[0])
+            iname = request.form['itemname']
+            cur.execute('''SELECT item_id from items where itemname = "%s"''' % (iname))
+            item_id = cur.fetchall()[0]
+            quantity = request.form['quantity']
+            cur.execute('''SELECT price FROM items WHERE itemname = "%s"''' % (iname))
+            t_price = int(quantity) * int(cur.fetchall()[0][0])
+            price[0] = t_price
+            cur.execute('''INSERT INTO order_item VALUES (%s, %s, %s, %s)''', (order_id, item_id, quantity, t_price))
+            mysql.connection.commit()
+            cur.close()
+            return redirect('/orderitemtables')
     else:
         results = cur.execute('''SELECT * FROM order_item''')
         count_item[0] = results + 101
         iteminfo = cur.fetchall()
         results = cur.execute('''SELECT itemname FROM items''')
         item_names = cur.fetchall()
-        return render_template('orderitems.html', iteminfo = iteminfo, item_names = (item_names))
+        return render_template('orderitems.html', iteminfo = iteminfo, item_names = (item_names), order_id = 'OI'+str(count_order[0]), price = price[0])
 
 @app.route('/tablestables', methods=['GET', 'POST'])
 def seetablestables():
