@@ -19,7 +19,6 @@ count_table = [11]
 count_chef = [11]
 count_waiter = [11]
 count_order = [11]
-price = [0]
 
 @app.route('/')
 def home():
@@ -46,15 +45,18 @@ def seeitemstable():
 
 @app.route('/orderitemtables', methods=['GET', 'POST'])
 def seeorderitemstable():
+    show_tableinfo = ""
     cur = mysql.connection.cursor() 
     if(request.method == 'POST'):
         if(request.form['ordersub'] == "ADD THIS TO ORDER"):
-            order_id = request.form['order_id']
+            order_id = 'OI'+str(count_order[0])
+            count_order[0] += 1
             table_no = request.form['table_no']
             chef_id = request.form['chef_id']
             waiter_id = request.form['waiter_id']
-            amount = request.form['amount']
-            cur.execute('''INSERT INTO orders VALUES (%s, %s, %s, %s,  %s)''', (order_id, table_no, chef_id, waiter_id, amount))
+            cur.execute('''SELECT SUM(t_price) FROM order_item WHERE order_id = "%s"''' % order_id)
+            amount = cur.fetchall()
+            cur.execute('''INSERT INTO orders VALUES (%s, %s, %s, %s,  %s)''', (order_id, table_no[:3:], chef_id[:3:], waiter_id[:3:], amount[0][0]))
             mysql.connection.commit()
             cur.close()
             return redirect('/orderitemtables')
@@ -66,18 +68,25 @@ def seeorderitemstable():
             quantity = request.form['quantity']
             cur.execute('''SELECT price FROM items WHERE itemname = "%s"''' % (iname))
             t_price = int(quantity) * int(cur.fetchall()[0][0])
-            price[0] = t_price
             cur.execute('''INSERT INTO order_item VALUES (%s, %s, %s, %s)''', (order_id, item_id, quantity, t_price))
             mysql.connection.commit()
             cur.close()
             return redirect('/orderitemtables')
     else:
-        results = cur.execute('''SELECT * FROM order_item''')
+        results = cur.execute('''SELECT * FROM order_item ORDER BY order_id DESC''')
         count_item[0] = results + 101
         iteminfo = cur.fetchall()
         results = cur.execute('''SELECT itemname FROM items''')
         item_names = cur.fetchall()
-        return render_template('orderitems.html', iteminfo = iteminfo, item_names = (item_names), order_id = 'OI'+str(count_order[0]), price = price[0])
+        cur.execute('''SELECT * FROM tables''')
+        show_tableinfo = cur.fetchall()
+        cur.execute('''SELECT chef_name, chef_id FROM chef''')
+        show_chefinfo = cur.fetchall()
+        cur.execute('''SELECT waiter_name, waiter_id FROM waiter''')
+        show_waiterinfo = cur.fetchall()
+        count_order[0] = cur.execute('''SELECT * from orders''') + 11
+        return render_template('orderitems.html', iteminfo = iteminfo, item_names = (item_names), order_id = 'OI'+str(count_order[0]),
+        show_tableinfo = show_tableinfo, show_chefinfo = show_chefinfo, show_waiterinfo = show_waiterinfo)
 
 @app.route('/tablestables', methods=['GET', 'POST'])
 def seetablestables():
@@ -119,7 +128,7 @@ def seecheftables():
     else:
         results = cur.execute('''SELECT * FROM chef''')
         count_chef[0] = results + 11
-        iteminfo = cur.fetchall()
+        iteminfo = cur.fetchall()       
         return render_template('chef.html', iteminfo = iteminfo, chef_id = 'C'+str(count_chef[0]))
 
 @app.route('/waitertables', methods=['GET', 'POST'])
@@ -147,6 +156,13 @@ def seewaitertables():
         count_waiter[0] = results + 11
         iteminfo = cur.fetchall()
         return render_template('waiter.html', iteminfo = iteminfo, waiter_id = 'W'+str(count_waiter[0]))
+
+@app.route('/orderstable')
+def seeordestable():
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT * FROM orders''')
+    iteminfo = cur.fetchall()
+    return  render_template('orders.html', iteminfo = iteminfo)
 
 
 if __name__ == '__main__':

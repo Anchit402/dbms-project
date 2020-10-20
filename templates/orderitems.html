@@ -2,8 +2,8 @@
 <section class="text-gray-500 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">ITEMS TABLE</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Our Menu Card</p>
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">ORDER_ITEMS TABLE</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">SELECT WHAT THE CUSTOMER WANTS TO EAT AND WAITER, CHEF, AND TABLE</p>
         </div>
         <div class="lg:w-2/3 w-full mx-auto overflow-auto">
             <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -31,16 +31,8 @@
                         <td class="px-4 py-3"><input type="text" name="t_price"  value="AUTO" size="10" STYLE="background-color: #2D3748; color: white;"></td>
                         <input type="submit" value="ADD THIS TO ORDER_ITEMS" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" name="ordersub"></button>
                     </tr> 
-                    <tr>
-                        <td class="px-4 py-3"><input type="text" name="order_id" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="order_id"></td>
-                        <td class="px-4 py-3"><input type="text" name="table_no" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="table_no"></td>
-                        <td class="px-4 py-3"><input type="text" name="chef_id" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="chef_id"></td>  
-                        <td class="px-4 py-3"><input type="text" name="waiter_id" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="waiter_id"></td>
-                        <td class="px-4 py-3"><input type="text" name="amount" size="10" STYLE="background-color: #2D3748; color: white;" placeholder="Amount"></td>
-                        <input type="submit" value="ADD THIS TO ORDER" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" name="ordersub"></button>
-                    </tr> 
-                </form>
-                {% for i in iteminfo %}
+                        
+                    {% for i in iteminfo %}
                     <tr>
                         <td class="px-4 py-3 text-lg text-white">{{i[0]}}</td>
                         <td class="px-4 py-3 text-lg text-white">{{i[1]}}</td>
@@ -51,8 +43,50 @@
                         </td>
                     </tr>  
                 {% endfor %}
+                <thead>
+                    <tr>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Order_id</th>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Item_id</th>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Chef Assigned</th>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Waiter Assigned</th>
+                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Total Bill</th>
+                        <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
+                    </tr>
+                </thead>
+
+                <tr>
+                    <td class="px-4 py-3"><input type="text" name="order_id" value="{{order_id}}" size="10" STYLE="background-color: #2D3748; color: white;"></td>
+                    <td class="px-4 py-3 text-lg text-white">
+                        <select name="table_no" STYLE="background-color: #2D3748;">
+                            {% for i in show_tableinfo %}
+                                <option STYLE="background-color: #2D3748;">{{i[0]}} - {{i[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td class="px-4 py-3 text-lg text-white">
+                        <select name="chef_id" STYLE="background-color: #2D3748;">
+                            {% for i in show_chefinfo %}
+                                <option STYLE="background-color: #2D3748;">{{i[1]}} - {{i[0]}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td class="px-4 py-3 text-lg text-white">
+                        <select name="waiter_id" STYLE="background-color: #2D3748;">
+                            {% for i in show_waiterinfo %}
+                                <option STYLE="background-color: #2D3748;">{{i[1]}} - {{i[0]}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td class="px-4 py-3"><input type="text" name="amount" size="10" STYLE="background-color: #2D3748; color: white;" value="AUTO"></td>
+                    
+                </tr> 
+                
+                
+                
             </tbody>
             </table>
+            <input type="submit" value="ADD THIS TO ORDER" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" name="ordersub"></button>
+        </form>
         </div>
         <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
             <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Got To Order_items
@@ -64,5 +98,3 @@
         </div>
         </div>
     </section>
-
-
