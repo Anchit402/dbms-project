@@ -2,30 +2,29 @@
 <section class="text-gray-500 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">TABLE OF "TABLES"</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">ENTER TABLE ID AND SEAT CAPACITY</p>
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">"TABLES" TABLE</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">ENTER THE SEATCAPACITY OF ALL TABLES</p>
         </div>
         <div class="lg:w-2/3 w-full mx-auto overflow-auto">
             <table class="table-auto w-full text-left whitespace-no-wrap">
             <thead>
                 <tr>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Table_no</th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Seat Capacity</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">chef_id</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">order_id</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">waiter_id</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Order_items</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">quantity</th>
                 <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
                 </tr>
             </thead>
             <tbody>
-                <form action="", method="POST">
+                {% for i in show_order_chef %}
                     <tr>
-                        <td class="px-4 py-3"><input type="text" name="table_no" size="10" STYLE="background-color: #2D3748; color: white;" value="{{table_no}}"></td>
-                        <td class="px-4 py-3"><input type="number" name="seat_capacity" size="10" STYLE="background-color: #2D3748; color: white;" min="1" value="1"></td>
-                        <input type="submit" value="ADD TABLE" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"></button>
-                    </tr> 
-                </form>
-                {% for i in iteminfo %}
-                    <tr>
-                        <td class="px-4 py-3" STYLE="background-color: #2D3748; color: white;">{{i[0]}}</td>
-                        <td class="px-4 py-3" STYLE="background-color: #2D3748; color: white;">{{i[1]}}</td>
+                        <td class="px-4 py-3" style="color: whitesmoke;">{{i[0]}}</td>
+                        <td class="px-4 py-3" style="color: whitesmoke;">{{i[1]}}</td>
+                        <td class="px-4 py-3" style="color: whitesmoke;">{{i[2]}}</td>
+                        <td class="px-4 py-3" style="color: whitesmoke;">{{i[3]}}</td>
+                        <td class="px-4 py-3" style="color: whitesmoke;">{{i[4]}}</td>
                         <td class="w-10 text-center">
                             <input name="plan" type="radio">
                         </td>

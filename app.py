@@ -164,6 +164,37 @@ def seeordestable():
     iteminfo = cur.fetchall()
     return  render_template('orders.html', iteminfo = iteminfo)
 
+@app.route('/feedbacktables', methods=['GET', 'POST'])
+def seefeedbackstables():
+    cur = mysql.connection.cursor()
+    if(request.method == 'POST'):
+        order_id = request.form['order_id']
+        cust_name = request.form['cust_name']
+        dob = request.form['dob']
+        day = int(dob.split('-')[0])
+        month = int(dob.split('-')[1])
+        year = int(dob.split('-')[2])
+        rating = request.form['rating']
+        review = request.form['review']
+        contact = request.form['contact']
+        cur.execute('''INSERT INTO customer_feedback VALUES (%s, %s, %s, %s, %s, %s)''', (order_id, cust_name,
+        str(day)+'-'+str(month)+'-'+str(year), rating, review, contact))
+        mysql.connection.commit()
+        cur.close()
+        return redirect('/feedbacktables')
+    else:
+        results = cur.execute('''SELECT * FROM customer_feedback''')
+        iteminfo = cur.fetchall()
+        cur.execute('''SELECT order_id FROM orders ORDER BY order_id''')
+        show_order_id = cur.fetchall()
+        return render_template('feedbacks.html', iteminfo = iteminfo, show_order_id = show_order_id)
+
+@app.route('/cheforderstable')
+def seecheforderstable():
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT chef_id, order_id, itemname, quantity FROM chef, order_item, items''')
+    iteminfo = cur.fetchall()
+    return  render_template('orderchef.html', iteminfo = iteminfo)
 
 if __name__ == '__main__':
     app.run(debug = True)
