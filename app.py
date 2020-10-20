@@ -121,6 +121,8 @@ def seecheftables():
             age = datetime.datetime.now().year - day
         else:
             age = datetime.datetime.now().year - day - 1
+        if (age <= 18):
+            return "This is not legal, Sorry"
         cur.execute('''INSERT INTO chef VALUES (%s, %s, %s, %s, %s, %s)''', (chef_id, chef_name, str(day)+'-'+str(month)+'-'+str(year), salary, contact, age))
         mysql.connection.commit()
         cur.close()
@@ -147,6 +149,8 @@ def seewaitertables():
             age = datetime.datetime.now().year - day
         else:
             age = datetime.datetime.now().year - day - 1
+        if (age <= 18):
+            return "This is not legal, Sorry"
         cur.execute('''INSERT INTO waiter VALUES (%s, %s, %s, %s, %s, %s)''', (waiter_id, waiter_name, str(day)+'-'+str(month)+'-'+str(year), salary, contact, age))
         mysql.connection.commit()
         cur.close()
