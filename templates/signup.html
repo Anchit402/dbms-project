@@ -1,0 +1,80 @@
+<!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+<body style="background: #1a202c;;">
+    <section class="text-gray-500 bg-gray-900 body-font">
+        <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+            <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+                <h1 class="title-font font-medium text-3xl text-white">SIGNUP PAGE</h1>
+                <p class="leading-relaxed mt-4">PLEASE ENTER YOUR EMAIL AND PASSWORD OF YOUR CHOICE</p>
+            </div>
+            <div class="lg:w-2/6 md:w-1/2 bg-gray-800 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+                <h2 class="text-white text-lg font-medium title-font mb-5">Sign Up</h2>
+                <input class="bg-gray-900 rounded border text-white border-gray-900 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Email" type="text">
+                <input class="bg-gray-900 rounded border text-white border-gray-900 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Password" type="password">
+                <input class="bg-gray-900 rounded border text-white border-gray-900 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Re-type your Password" type="password">
+                <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+                <p class="text-xs text-gray-600 mt-3">Remeber these detials and please login</p>
+            </div>
+        </div>
+    </section>
+</body> -->
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="description" content="Login - Register Template">
+    <meta name="author" content="Lorenzo Angelino aka MrLolok">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css')}}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <style>
+        body {
+            background-color: #1D1F20;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container-login">
+        <div id="title">
+            <i class="material-icons lock">lock</i>
+        </div>
+        <h1>Login</h1>
+        <form>
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">face</i>
+                </div>
+                <input id="username" placeholder="Username" type="text" required class="validate" autocomplete="off">
+            </div>
+            <div class="clearfix"></div>
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">vpn_key</i>
+                </div>
+                <input id="password" placeholder="Password" type="password" required class="validate" autocomplete="off">
+            </div>
+            <div class="remember-me">
+                <input type="checkbox">
+                <span style="color: #DDD">Remember Me</span>
+            </div>
+        </form>
+        <div class="register">
+                <a href="file:///C:/Users/ANCHIT/Desktop/spark/index.html#"><button id="register-link">Log in</button></a>
+            </div>
+        <div class="forgot-password">
+            <a href="#">Forgot your password?</a>
+        </div>
+        <div class="privacy">
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="register">
+            Don't have an account yet?
+            <a href="login1.html"><button id="register-link">Register here</button></a>
+        </div>
+    </div>
+</body>
+
+</html>

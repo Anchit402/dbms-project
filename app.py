@@ -20,9 +20,13 @@ count_chef = [11]
 count_waiter = [11]
 count_order = [11]
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 @app.route('/itemtables', methods=['GET', 'POST'])
 def seeitemstable():
@@ -73,10 +77,9 @@ def seeorderitemstable():
             cur.close()
             return redirect('/orderitemtables')
     else:
-        results = cur.execute('''SELECT * FROM order_item ORDER BY order_id DESC''')
-        count_item[0] = results + 101
+        cur.execute('''SELECT * FROM order_item ORDER BY order_id DESC''')
         iteminfo = cur.fetchall()
-        results = cur.execute('''SELECT itemname FROM items''')
+        cur.execute('''SELECT itemname FROM items''')
         item_names = cur.fetchall()
         cur.execute('''SELECT * FROM tables''')
         show_tableinfo = cur.fetchall()
@@ -84,7 +87,9 @@ def seeorderitemstable():
         show_chefinfo = cur.fetchall()
         cur.execute('''SELECT waiter_name, waiter_id FROM waiter''')
         show_waiterinfo = cur.fetchall()
-        count_order[0] = cur.execute('''SELECT * from orders''') + 11
+        results = cur.execute('''SELECT * FROM orders''') + 11
+        count_order[0] = results
+        
         return render_template('orderitems.html', iteminfo = iteminfo, item_names = (item_names), order_id = 'OI'+str(count_order[0]),
         show_tableinfo = show_tableinfo, show_chefinfo = show_chefinfo, show_waiterinfo = show_waiterinfo)
 
@@ -196,9 +201,18 @@ def seefeedbackstables():
 @app.route('/cheforderstable')
 def seecheforderstable():
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT chef_id, order_id, itemname, quantity FROM chef, order_item, items''')
+    cur.execute('''SELECT chef_id, orders.order_id, itemname, quantity FROM orders,  items, order_item
+    WHERE orders.order_id = order_item.order_id AND order_item.item_id = items.item_id''')
     iteminfo = cur.fetchall()
     return  render_template('orderchef.html', iteminfo = iteminfo)
+
+@app.route('/waiterorderstable')
+def seewaiterorderstable():
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT waiter_id, orders.order_id, itemname, quantity, table_no FROM orders,  items, order_item
+    WHERE orders.order_id = order_item.order_id AND order_item.item_id = items.item_id''')
+    iteminfo = cur.fetchall()
+    return  render_template('orderwaiter.html', iteminfo = iteminfo)
 
 if __name__ == '__main__':
     app.run(debug = True)
