@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hakuna Matata</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css"/>
+</head>
+<body>
+    <header>
+        <nav id="header-nav" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+            <a href="index.html" class="pull-left visible-md visible-lg">
+                <div id="image" alt="Logo image">
+                <img src="/static/pic/hakuna_matata.jpg" height="150px">
+                </div>
+            </a>
+
+            <div class="navbar-brand">
+                <a href="index.html"><h1>HAKUNA MATATA</h1></a>
+                
+            </div>
+
+            
+            </div>
+            
+            <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul id="nav-list" class="nav navbar-nav navbar-right">
+                <li id="navHomeButton">
+                <a href="index.html">
+                    <span class="glyphicon glyphicon-home"></span><br class="hidden-xs"> Admin</a>
+                </li>
+                <li id="navMenuButton">
+                <a href="#">
+                    <h1 class="glyphicon glyphicon-cutlery"></h1><br class="hidden-xs"> Menu</a>
+                </li>
+                
+                <li id="phone" class="hidden-xs">
+                <a href="tel:932-509-7079">
+                    <span>932-509-7079</span></a><div>* We Deliver</div>
+                </li>
+            </ul><!-- #nav-list -->
+            </div><!-- .collapse .navbar-collapse -->
+        </div><!-- .container -->
+        </nav><!-- #header-nav -->
+    </header>
+
+    <div id="call-btn" class="visible-xs">
+        <a class="btn" href="tel:932-509-7079">
+        <span class="glyphicon glyphicon-earphone"></span>
+        410-602-5008
+        </a>
+    </div>
+    <div id="xs-deliver" class="text-center visible-xs">* We Deliver</div>
+
+    <div id="main-content" class="container">
+        <h2 id="menu-categories-tile" class="text-center"> MENU </h2>
+
+        <section class="row">
+
+        {% for i in iteminfo1 %}
+            <div class="col-md-4 col-sm-6 col-xs-12" id="items" style="display: block;">
+                <a href="#">
+                    <div id="menu-tile">
+                    <img src={{i[1]}} alt="{{i[0]}}" class="img-responsive visible-xs visible-lg visible-md visible-sm" style="width: 100%; height: 100%;">
+                    <span>{{i[0]}}-{{i[2]}}</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12" id="qunatity" style="display: none;">
+                <a href="#">
+                    <div id="menu-tile">
+                        <p style="text-align: center;">Please Enter Qunatity</p>
+                        <input type="number" name="" id="" style="width: 10%; display: block; margin: 20% auto;">
+                        <input type="submit" name="" id="" style="width: 30%; display: block; margin: -30px auto;">
+                        <span>{{i[0]}}-{{i[2]}}</span>
+                        </div>
+                </a>
+            </div>
+        {% endfor %}
+
+        </section>
+        <form method="POST">
+            <section class="text-gray-500 bg-gray-900 body-font relative">
+                <div class="absolute inset-0 bg-gray-900">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3888.041176678404!2d79.142093!3d12.969217000000002!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1604060829750!5m2!1sen!2sin" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"  style="filter: grayscale(1) contrast(1.2) opacity(0.16);"></iframe>
+                </div>
+                <div class="container px-5 py-24 mx-auto flex">
+                    <div class="lg:w-1/3 md:w-1/2 bg-gray-900 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10">
+                    <h1 class="text-white text-lg mb-1 font-medium title-font">ORDER HERE</h1>
+                    <p class="leading-relaxed mb-5 text-gray-500">Add your order items using order this button and when completed press order complted button</p>
+                    <p class="leading-relaxed mb-5 text-gray-500">Also If You Wish to give your feedback please remember the order_id</p>
+                    <input class="bg-gray-800 text-white rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Order Id" type="text" name="order_id" value="{{order_id}}">
+                    <form action="GET">
+                    <td class="bg-gray-800 text-white rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4 chosen">
+                        <select name="itemname" class="chosen">
+                            {% for item_name in item_names %}
+                                <option  class="bg-gray-800 text-white rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" id="result">{{item_name[0]}}-{{item_name[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <input class="bg-gray-800 text-white rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Quantity" type="number" name="quantity" style="margin-top: 10px;">
+                    <input class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" style="margin-bottom: 10px;" type="submit" name="ordersub" value="ADD THIS TO ORDER_ITEMS"></button>
+                    
+                    <td class="bg-gray-800 text-white rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4 chosen">
+                        <select name="tableno" class="chosen">
+                            {% for i in tableno %}
+                                <option  class="bg-gray-800 text-white rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" id="result">{{i[0]}}-{{i[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <input class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="submit" name="ordersub" value="COMPLETE ORDER" style="margin-top: 10px;"></button>
+                    <p class="text-xs text-gray-6000 mt-3">Thank You for chosing our restaurant.</p>
+                    </div>
+                </div>
+            </section>
+        </form>
+
+
+    </div>
+
+
+    <footer class="panel-footer" style="margin-top: 10px;">
+        <div class="container">
+        <div class="row">
+            <section id="hours" class="col-sm-4">
+            <span>Hours:</span><br>
+            Sun-Thurs: 11:15am - 10:00pm<br>
+            Fri: 11:15am - 2:30pm<br>
+            Monday Closed
+            <hr class="visible-xs">
+            </section>
+            <section id="address" class="col-sm-4">
+            <span>Address:</span><br>
+            New Thiruvalam Chitoor, Bus Road<br>
+            Katpadi, Vellore, Tamil Nadu 632006
+        
+            <p>* Delivery area within 4-5 kilometres, with minimum order of 200Rs plus 30RS charge for all deliveries.</p>
+            <hr class="visible-xs">
+            </section>
+            <section id="testimonials" class="col-sm-4">
+            <p>"The best Indian restaurant I've been to! And that's saying a lot, since I've been to many!"</p>
+            <p>"Amazing food! Great service! Couldn't ask for more! I'll be back again and again!"</p>
+            </section>
+        </div>
+        <div class="text-center">&copy; Copyright Hakuna Matata 2014</div>
+        </div>
+    </footer>
+</body>
+    <script type="text/javascript">
+        $(".chosen").chosen();
+    </script>
+</html>

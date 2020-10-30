@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="description" content="Login - Register Template">
+    <meta name="author" content="Lorenzo Angelino aka MrLolok">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/login.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <style>
+        body {
+            background-color: #1a202c;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container-login" style="border: none">
+        <div id="title">
+            <i class="material-icons lock">lock</i>
+        </div>
+        <h1>Login</h1>
+        <form method="POST">
+            <div class="input" style="border: 2px solid #1a202c;">
+                <div class="input-addon">
+                    <i class="material-icons">face</i>
+                </div>
+                <input id="username" placeholder="Email" type="email" required class="validate" autocomplete="off" name="email" style="border: none;">
+            </div>
+            <div class="clearfix"></div>
+            <div class="input" style="border: 2px solid #1a202c;">
+                <div class="input-addon">
+                    <i class="material-icons">vpn_key</i>
+                </div>
+                <input id="password" placeholder="Password" type="password" required class="validate" autocomplete="off" name="password" style="border: none;">
+            </div>
+            <div class="remember-me">
+                <input type="checkbox">
+                <span style="color: #DDD">Remember Me</span>
+            </div>
+        
+        <div class="register">
+                <a href="file:///C:/Users/ANCHIT/Desktop/spark/index.html#"><button id="register-link" style="border: 2px solid #667EEA;">Log in</button></a>
+        </div>
+    </form>
+        <div class="forgot-password">
+            <a href="#">Forgot your password?</a>
+        </div>
+        <div class="privacy">
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="register">
+            Don't have an account yet?
+            <a href="/signup"><button id="register-link" style="border: 2px solid #667EEA;">Register here</button></a>
+        </div>
+    </div>
+</body>
+
+</html>

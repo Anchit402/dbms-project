@@ -16,7 +16,6 @@ body {
     border-radius: 0.35em;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
-    border: 2px solid #DCDC00;
 }
 
 #container-register {
@@ -53,15 +52,13 @@ body {
     background-color: #373b3d;
     padding: 8px 0px;
     margin-top: 15px;
-    border: 2px solid #DCDC00;
+
 }
 
 .input-addon {
     float: left;
     background-color: #373b3d;
-    border: 1px solid #373b3d;
     padding: 4px 8px;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 input[type=checkbox] {
@@ -72,35 +69,27 @@ input[type=text] {
     color: #949494;
     margin: 0;
     background-color: #373b3d;
-    border: 1px solid #373b3d;
     padding: 6px 0px;
-    border-radius: 3px;
 }
 
 input[type=text]:focus {
-    border: 1px solid #373b3d;
 }
 
 input[type=password] {
     color: #949494;
     margin: 0;
     background-color: #373b3d;
-    border: 1px solid #373b3d;
     padding: 6px 0px;
-    border-radius: 3px;
 }
 
 input[type=password]:focus {
-    border: 1px solid #373b3d;
 }
 
 input[type=email] {
     color: #949494;
     margin: 0;
     background-color: #373b3d;
-    border: 1px solid #373b3d;
     padding: 6px 0px;
-    border-radius: 3px;
 }
 
 input[type=email]:focus {

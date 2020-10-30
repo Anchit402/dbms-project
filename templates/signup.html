@@ -1,80 +1,73 @@
-<!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
-<body style="background: #1a202c;;">
-    <section class="text-gray-500 bg-gray-900 body-font">
-        <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-            <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-                <h1 class="title-font font-medium text-3xl text-white">SIGNUP PAGE</h1>
-                <p class="leading-relaxed mt-4">PLEASE ENTER YOUR EMAIL AND PASSWORD OF YOUR CHOICE</p>
-            </div>
-            <div class="lg:w-2/6 md:w-1/2 bg-gray-800 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-                <h2 class="text-white text-lg font-medium title-font mb-5">Sign Up</h2>
-                <input class="bg-gray-900 rounded border text-white border-gray-900 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Email" type="text">
-                <input class="bg-gray-900 rounded border text-white border-gray-900 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Password" type="password">
-                <input class="bg-gray-900 rounded border text-white border-gray-900 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4" placeholder="Re-type your Password" type="password">
-                <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
-                <p class="text-xs text-gray-600 mt-3">Remeber these detials and please login</p>
-            </div>
-        </div>
-    </section>
-</body> -->
-
-
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Register</title>
     <meta name="description" content="Login - Register Template">
     <meta name="author" content="Lorenzo Angelino aka MrLolok">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css')}}" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <link rel="stylesheet" href="/static/login.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            background-color: #1D1F20;
+            background-color: #1a202c;
         }
     </style>
 </head>
 
 <body>
-    <div id="container-login">
+    <div id="container-register">
         <div id="title">
-            <i class="material-icons lock">lock</i>
+            <i class="material-icons lock">lock</i> Register
         </div>
-        <h1>Login</h1>
-        <form>
-            <div class="input">
+
+        <form method="POST">
+            <div class="input" style="border: 2px solid #1a202c;">
+                <div class="input-addon">
+                    <i class="material-icons">email</i>
+                </div>
+                <input id="email" placeholder="Email" type="email" required class="validate" autocomplete="off" name="email" style="border: none;">
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="input" style="border: 2px solid #1a202c;">
                 <div class="input-addon">
                     <i class="material-icons">face</i>
                 </div>
-                <input id="username" placeholder="Username" type="text" required class="validate" autocomplete="off">
+                <input id="username" placeholder="Password" type="password" required class="validate" autocomplete="off" name="password" style="border: none;">
             </div>
+
             <div class="clearfix"></div>
-            <div class="input">
+
+            <div class="input" style="border: 2px solid #1a202c;">
                 <div class="input-addon">
                     <i class="material-icons">vpn_key</i>
                 </div>
-                <input id="password" placeholder="Password" type="password" required class="validate" autocomplete="off">
+                <input id="password" placeholder="Re-Type your Password" type="password" required class="validate" autocomplete="off" name="repassword" style="border: none;">
             </div>
+
             <div class="remember-me">
-                <input type="checkbox">
-                <span style="color: #DDD">Remember Me</span>
+                <input type="checkbox"  id='checkbox' checked>
+                <span style="color: #DDD">I accept Terms of Service</span>
             </div>
+
+            <input type="submit" value="Register" style="border: 2px solid #667EEA;" />
         </form>
-        <div class="register">
-                <a href="file:///C:/Users/ANCHIT/Desktop/spark/index.html#"><button id="register-link">Log in</button></a>
-            </div>
-        <div class="forgot-password">
-            <a href="#">Forgot your password?</a>
-        </div>
+
         <div class="privacy">
-            <a href="#">Privacy Policy</a>
+            <a href="/">Privacy Policy</a>
         </div>
+
         <div class="register">
-            Don't have an account yet?
-            <a href="login1.html"><button id="register-link">Register here</button></a>
+            Do you already have an account?
+            <a href="/login"><button id="register-link" style="border: 2px solid #667EEA;">Log In here</button></a>
         </div>
     </div>
+    <script>
+        document.querySelector('#checkbox').addEventListener('click', ()=>{
+            document.querySelector('#checkbox').checked = true;
+        })
+    </script>
 </body>
 
 </html>

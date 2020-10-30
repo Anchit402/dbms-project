@@ -1,0 +1,98 @@
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/bootstrap.min.css">
+<link rel="stylesheet" href="/static/styles.css">
+<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+<nav id="header-nav" class="navbar navbar-default" style="height: 100px; margin: 0;">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="index.html" class="pull-left visible-md visible-lg">
+            <div id="image" alt="Logo image">
+                <img src="/static/pic/hakuna_matata.jpg" style="height: 100px;">
+            </div>
+            </a>
+
+            <div class="navbar-brand">
+            <a href="index.html"><h1>HAKUNA MATATA</h1></a>
+            
+            </div>
+
+            
+        </div>
+        
+        <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul id="nav-list" class="nav navbar-nav navbar-right">
+            <li id="navHomeButton">
+                <a href="index.html">
+                <span class="glyphicon glyphicon-home"></span><br class="hidden-xs"> Admin</a>
+            </li>
+            <li id="navMenuButton">
+                <a href="#" onclick="$dc.loadMenuCategories();">
+                <span class="glyphicon glyphicon-cutlery"></span><br class="hidden-xs"> Menu</a>
+            </li>
+            
+            <li id="phone" class="hidden-xs">
+                <a href="tel:932-509-7079">
+                <span>932-509-7079</span></a><div>* We Deliver</div>
+            </li>
+            </ul><!-- #nav-list -->
+        </div><!-- .collapse .navbar-collapse -->
+        </div><!-- .container -->
+    </nav><!-- #header-nav -->
+
+<section class="text-gray-500 bg-gray-900 body-font relative">
+    <div class="container px-5 py-24 mx-auto flex sm:flex-no-wrap flex-wrap">
+        <div class="lg:w-2/3 md:w-1/2 bg-gray-900 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
+            <iframe width="100%" height="100%" title="map" class="absolute inset-0" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed" style="filter: grayscale(1) contrast(1.2) opacity(0.16);"></iframe>
+            <div class="bg-gray-900 relative flex flex-wrap py-6">
+            <div class="lg:w-1/2 px-6">
+                <h2 class="title-font font-medium text-white tracking-widest text-sm">ADDRESS</h2>
+                <p class="leading-relaxed">Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter</p>
+            </div>
+            <div class="lg:w-1/2 px-6 mt-4 lg:mt-0">
+                <h2 class="title-font font-medium text-white tracking-widest text-sm">EMAIL</h2>
+                <a class="text-indigo-500 leading-relaxed">example@email.com</a>
+                <h2 class="title-font font-medium text-white tracking-widest text-sm mt-4">PHONE</h2>
+                <p class="leading-relaxed">123-456-7890</p>
+            </div>
+            </div>
+    </div>
+        <div class="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+            <h2 class="text-white text-lg mb-1 font-medium title-font">Feedback</h2>
+            <p class="leading-relaxed mb-5 text-gray-600">Post-ironic portland shabby chic echo park, banjo fashion axe</p>
+            <input class="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base text-white px-4 py-2 mb-4" placeholder="Order_id" type="text">
+            <input class="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base text-white px-4 py-2 mb-4" placeholder="Name" type="text">
+            <input class="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base text-white px-4 py-2 mb-4" placeholder="Phone No" type="text">
+            <input class="bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-indigo-500 text-base text-white px-4 py-2 mb-4" placeholder="Rating" type="number">
+            <textarea class="bg-gray-800 rounded border border-gray-700 focus:outline-none h-32 focus:border-indigo-500 text-base text-white px-4 py-2 mb-4 resize-none" placeholder="Review"></textarea>
+            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+            <p class="text-xs text-gray-500 mt-3">Chicharrones blog helvetica normcore iceland tousled brook viral artisan.</p>
+        </div>
+        </div>
+</section>
+<footer class="panel-footer" style="margin: 0;">
+        <div class="container">
+        <div class="row">
+            <section id="hours" class="col-sm-4">
+            <span>Hours:</span><br>
+            Sun-Thurs: 11:15am - 10:00pm<br>
+            Fri: 11:15am - 2:30pm<br>
+            Monday Closed
+            <hr class="visible-xs">
+            </section>
+            <section id="address" class="col-sm-4">
+            <span>Address:</span><br>
+            New Thiruvalam Chitoor, Bus Road<br>
+            Katpadi, Vellore, Tamil Nadu 632006
+        
+            <p>* Delivery area within 4-5 kilometres, with minimum order of 200Rs plus 30RS charge for all deliveries.</p>
+            <hr class="visible-xs">
+            </section>
+            <section id="testimonials" class="col-sm-4">
+            <p>"The best Indian restaurant I've been to! And that's saying a lot, since I've been to many!"</p>
+            <p>"Amazing food! Great service! Couldn't ask for more! I'll be back again and again!"</p>
+            </section>
+        </div>
+        <div class="text-center">&copy; Copyright Hakuna Matata 2014</div>
+        </div>
+</footer>
