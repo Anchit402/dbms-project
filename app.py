@@ -21,6 +21,10 @@ count_waiter = [11]
 count_order = [11]
 n = [1]
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 @app.route('/')
 def landing():
     return render_template('index.html')
@@ -33,7 +37,7 @@ def login():
         password = request.form['password']
         results = cur.execute('''SELECT * FROM login WHERE email = "%s" AND password = "%s"''' % (email, password))
         if(results == 1):
-            return render_template('login.html')
+            return redirect('/home')
         else:
             return ('Sorry, Account does not exist')
     else:
@@ -60,13 +64,14 @@ def postmenu():
             waiter_id = cur.fetchall()[0][0]
             cur.execute('''SELECT SUM(t_price) FROM order_item WHERE order_id = "%s"''' % order_id)
             amount = cur.fetchall()
-            cur.execute('''INSERT INTO orders VALUES (%s, %s, %s, %s,  %s)''', (order_id, table_no[:3:], chef_id, waiter_id,
+            d = str(datetime.datetime.now().year) + '-' + str(datetime.datetime.now().month) + '-' + str(datetime.datetime.now().day)
+            cur.execute('''INSERT INTO orders VALUES (%s, %s, %s, %s, %s, %s)''', (order_id, d, table_no[:3:], chef_id, waiter_id,
             amount[0][0]))
             mysql.connection.commit()
             n[0] += 1
             cur.close()
             return redirect('/postmenu')
-        if(request.form['ordersub'] == "ADD THIS TO ORDER_ITEMS"):
+        elif(request.form['ordersub'] == "ADD THIS TO ORDER_ITEMS"):
             order_id = 'OI'+str(count_order[0])
             iname = request.form['itemname'].split('-')[0]
             cur.execute('''SELECT item_id from items where itemname = "%s"''' % (iname))
@@ -78,6 +83,12 @@ def postmenu():
             mysql.connection.commit()
             cur.close()
             return redirect('/postmenu')
+        else:
+            cur.execute('''DELETE FROM order_item WHERE item_id = (SELECT item_id FROM items WHERE itemname = "%s")
+            ''' % request.form['ordersub'].split('-')[0])
+            mysql.connection.commit()
+            cur.close()
+            return redirect('/postmenu')
     else:
         cur.execute('''SELECT itemname, price FROM items ''')
         item_names = cur.fetchall()
@@ -85,7 +96,10 @@ def postmenu():
         count_order[0] = results
         cur.execute('''SELECT * FROM tables''')
         tableno = cur.fetchall()
-        return render_template('postmenu.html', iteminfo1 = iteminfo1, order_id = 'OI'+str(count_order[0]), item_names = item_names, tableno = tableno)
+        cur.execute('''SELECT itemname FROM items WHERE item_id IN (SELECT item_id FROM order_item WHERE order_id = "%s")''' % ('OI'+str(count_order[0])))
+        vieworders = cur.fetchall()
+        return render_template('postmenu.html', iteminfo1 = iteminfo1, 
+        order_id = 'OI'+str(count_order[0]), item_names = item_names, tableno = tableno, vieworders = vieworders)
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     cur = mysql.connection.cursor()
@@ -123,56 +137,46 @@ def seeitemstable():
         iteminfo = cur.fetchall()
         return render_template('itemtable.html', iteminfo = iteminfo, item_id = 'I'+str(count_item[0]))
 
-@app.route('/postfeedback')
+@app.route('/postfeedback', methods=['GET', 'POST'])
 def postfeedback():
-    return render_template ('postfeedback.html')
-
-@app.route('/orderitemtables', methods=['GET', 'POST'])
-def seeorderitemstable():
-    show_tableinfo = ""
-    cur = mysql.connection.cursor() 
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT order_id FROM orders WHERE order_id NOT IN (SELECT order_id FROM customer_feedback)''')
+    order_ids = cur.fetchall()
     if(request.method == 'POST'):
-        if(request.form['ordersub'] == "ADD THIS TO ORDER"):
-            order_id = 'OI'+str(count_order[0])
-            count_order[0] += 1
-            table_no = request.form['table_no']
-            chef_id = request.form['chef_id']
-            waiter_id = request.form['waiter_id']
-            cur.execute('''SELECT SUM(t_price) FROM order_item WHERE order_id = "%s"''' % order_id)
-            amount = cur.fetchall()
-            cur.execute('''INSERT INTO orders VALUES (%s, %s, %s, %s,  %s)''', (order_id, table_no[:3:], chef_id[:3:], waiter_id[:3:],
-            amount[0][0]))
-            mysql.connection.commit()
-            cur.close()
-            return redirect('/orderitemtables')
-        if(request.form['ordersub'] == "ADD THIS TO ORDER_ITEMS"):
-            order_id = 'OI'+str(count_order[0])
-            iname = request.form['itemname']
-            cur.execute('''SELECT item_id from items where itemname = "%s"''' % (iname))
-            item_id = cur.fetchall()[0]
-            quantity = request.form['quantity']
-            cur.execute('''SELECT price FROM items WHERE itemname = "%s"''' % (iname))
-            t_price = int(quantity) * int(cur.fetchall()[0][0])
-            cur.execute('''INSERT INTO order_item VALUES (%s, %s, %s, %s)''', (order_id, item_id, quantity, t_price))
-            mysql.connection.commit()
-            cur.close()
-            return redirect('/orderitemtables')
-    else:
-        cur.execute('''SELECT * FROM order_item ORDER BY order_id DESC''')
-        iteminfo = cur.fetchall()
-        cur.execute('''SELECT itemname FROM items''')
-        item_names = cur.fetchall()
-        cur.execute('''SELECT * FROM tables''')
-        show_tableinfo = cur.fetchall()
-        cur.execute('''SELECT chef_name, chef_id FROM chef''')
-        show_chefinfo = cur.fetchall()
-        cur.execute('''SELECT waiter_name, waiter_id FROM waiter''')
-        show_waiterinfo = cur.fetchall()
-        results = cur.execute('''SELECT * FROM orders''') + 11
-        count_order[0] = results
-        
-        return render_template('orderitems.html', iteminfo = iteminfo, item_names = (item_names), order_id = 'OI'+str(count_order[0]),
-        show_tableinfo = show_tableinfo, show_chefinfo = show_chefinfo, show_waiterinfo = show_waiterinfo)
+        order_id = request.form['order_id']
+        dob = request.form['dob']
+        cust_name = request.form['cust_name']
+        day = int(dob.split('-')[0])
+        month = int(dob.split('-')[1])
+        year = int(dob.split('-')[2])
+        rating = request.form['rating']
+        review = request.form['review']
+        contact = request.form['contact']
+        cur.execute('''INSERT INTO customer_feedback VALUES (%s, %s, %s, %s, %s, %s)''', (order_id, cust_name,
+        str(day)+'-'+str(month)+'-'+str(year), rating, review, contact))
+        mysql.connection.commit()
+        cur.close()
+        return redirect('/postfeedback')
+    return render_template ('postfeedback.html', order_ids = order_ids)
+
+@app.route('/orderitems', methods=['GET', 'POST'])
+def orderitems():
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT order_item.order_id, order_item.item_id, itemname FROM order_item, items WHERE order_item.item_id = items.item_id''')
+    all_ids = cur.fetchall()
+    if(request.method == 'POST'):  
+        order_id = request.form['submit'].split('-')[1]
+        item_id = request.form['submit'].split('-')[2]
+        cur.execute('''DELETE FROM order_item WHERE order_id = "%s" AND item_id = "%s"''' % (order_id, item_id))
+        cur.execute('''SELECT SUM(t_price) FROM order_item WHERE order_id = "%s"''' % order_id)
+        new_amt = cur.fetchall()[0]
+        if(str(new_amt[0]) == 'None'):
+            cur.execute('''DELETE FROM orders WHERE order_id = "%s"''' % order_id)
+        else:
+            cur.execute('''UPDATE orders SET amount = "%s" WHERE order_id = "%s"''' % (new_amt[0], order_id))
+        mysql.connection.commit()
+        return redirect('/orderitems')
+    return render_template('orderitems.html', all_ids = all_ids)
 
 @app.route('/tablestables', methods=['GET', 'POST'])
 def seetablestables():
@@ -194,7 +198,7 @@ def seetablestables():
 @app.route('/cheftables', methods=['GET', 'POST'])
 def seecheftables():
     cur = mysql.connection.cursor()
-    if(request.method == 'POST'):
+    if(request.method == 'POST' and request.form['submit'] == 'add'):
         chef_id = 'C'+str(count_chef[0])
         chef_name = request.form['chef_name']
         dob = request.form['dob']
@@ -213,16 +217,20 @@ def seecheftables():
         mysql.connection.commit()
         cur.close()
         return redirect('/cheftables')
+    elif(request.method == 'POST' and request.form['submit'] != 'add'):
+        cur.execute('''DELETE FROM chef WHERE chef_id = "%s"''' % request.form['submit'])
+        mysql.connection.commit()
+        return redirect('/cheftables')
     else:
         results = cur.execute('''SELECT * FROM chef''')
         count_chef[0] = results + 11
-        iteminfo = cur.fetchall()       
+        iteminfo = cur.fetchall()
         return render_template('chef.html', iteminfo = iteminfo, chef_id = 'C'+str(count_chef[0]))
 
 @app.route('/waitertables', methods=['GET', 'POST'])
 def seewaitertables():
     cur = mysql.connection.cursor()
-    if(request.method == 'POST'):
+    if(request.method == 'POST' and request.form['submit'] == 'add'):
         waiter_id = 'W'+str(count_waiter[0])
         waiter_name = request.form['waiter_name']
         dob = request.form['dob']
@@ -240,6 +248,10 @@ def seewaitertables():
         cur.execute('''INSERT INTO waiter VALUES (%s, %s, %s, %s, %s, %s)''', (waiter_id, waiter_name, str(day)+'-'+str(month)+'-'+str(year), salary, contact, age))
         mysql.connection.commit()
         cur.close()
+        return redirect('/waitertables')
+    elif(request.method == 'POST' and request.form['submit'] != 'add'):
+        cur.execute('''DELETE FROM waiter WHERE waiter_id = "%s"''' % request.form['submit'])
+        mysql.connection.commit()
         return redirect('/waitertables')
     else:
         results = cur.execute('''SELECT * FROM waiter''')
@@ -282,7 +294,7 @@ def seefeedbackstables():
 @app.route('/cheforderstable')
 def seecheforderstable():
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT chef_id, orders.order_id, itemname, quantity FROM orders,  items, order_item
+    cur.execute('''SELECT chef_id, date, orders.order_id, itemname, quantity FROM orders,  items, order_item
     WHERE orders.order_id = order_item.order_id AND order_item.item_id = items.item_id''')
     iteminfo = cur.fetchall()
     return  render_template('orderchef.html', iteminfo = iteminfo)
@@ -290,7 +302,7 @@ def seecheforderstable():
 @app.route('/waiterorderstable')
 def seewaiterorderstable():
     cur = mysql.connection.cursor()
-    cur.execute('''SELECT waiter_id, orders.order_id, itemname, quantity, table_no FROM orders,  items, order_item
+    cur.execute('''SELECT waiter_id, date, orders.order_id, itemname, quantity, table_no FROM orders,  items, order_item
     WHERE orders.order_id = order_item.order_id AND order_item.item_id = items.item_id''')
     iteminfo = cur.fetchall()
     return  render_template('orderwaiter.html', iteminfo = iteminfo)

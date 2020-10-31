@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="./static/bootstrap.min.css" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body style="background-color: #E68F0D;">
     <header>
@@ -33,11 +34,13 @@
             <ul id="nav-list" class="nav navbar-nav navbar-right">
                 <li id="navHomeButton">
                 <a href="/login">
-                    <span class="glyphicon glyphicon-home"></span><br class="hidden-xs"> Admin</a>
+                    <i class="large material-icons">home</i><br class="hidden-xs"> Admin
+                </a>
                 </li>
                 <li id="navMenuButton">
-                <a href="#" onclick="$dc.loadMenuCategories();">
-                    <span class="glyphicon glyphicon-cutlery"></span><br class="hidden-xs"> Menu</a>
+                <a href="/postmenu" onclick="$dc.loadMenuCategories();">
+                    <i class="large material-icons">restaurant_menu</i><br class="hidden-xs"> Menu
+                </a>
                 </li>
                 
                 <li id="phone" class="hidden-xs">
@@ -64,7 +67,7 @@
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="#" onclick="$dc.loadMenuItems('B');">
+        <a href="/postmenu" onclick="$dc.loadMenuItems('B');">
             <div id="menu-tile">
             <img src="/static/pic/biryani.jpg" alt="Pic of restaurant" class="img-responsive visible-xs visible-lg visible-md visible-sm">
             <span>MENU</span>

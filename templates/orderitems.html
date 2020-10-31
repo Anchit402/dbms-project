@@ -1,9 +1,18 @@
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<body style="background-color: #1a202c;">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <section class="text-gray-500 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
             <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">ORDER_ITEMS TABLE</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">SELECT WHAT THE CUSTOMER WANTS TO EAT AND WAITER, CHEF, AND TABLE</p>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">DELETE THE ITEMS AS PER THE POLICY</p>
         </div>
         <div class="lg:w-2/3 w-full mx-auto overflow-auto">
             <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -11,90 +20,40 @@
                 <tr>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Order_id</th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Item_id</th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Quantity</th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Total Price</th>
                     <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
                 </tr>
             </thead>
             <tbody>
-                <form action="", method="POST">
+                <form action="" method="POST">
+                    {% for i in all_ids %}
                     <tr>
-                        <td class="px-4 py-3"><input type="text" name="order_id" value="{{order_id}}" size="10" STYLE="background-color: #2D3748; color: white;"></td>
-                        <td class="px-4 py-3 text-lg text-white">
-                            <select name="itemname" STYLE="background-color: #2D3748;">
-                                {% for item_name in item_names %}
-                                    <option STYLE="background-color: #2D3748;">{{item_name[0]}}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td class="px-4 py-3"><input type="number" name="quantity" value="1" size="10" STYLE="background-color: #2D3748; color: white;"></td>
-                        <td class="px-4 py-3"><input type="text" name="t_price"  value="AUTO" size="10" STYLE="background-color: #2D3748; color: white;"></td>
-                        <input type="submit" value="ADD THIS TO ORDER_ITEMS" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" name="ordersub"></button>
-                    </tr> 
                         
-                    {% for i in iteminfo %}
-                    <tr>
-                        <td class="px-4 py-3 text-lg text-white">{{i[0]}}</td>
-                        <td class="px-4 py-3 text-lg text-white">{{i[1]}}</td>
-                        <td class="px-4 py-3 text-lg text-white">{{i[2]}}</td>
-                        <td class="px-4 py-3 text-lg text-white">{{i[3]}}</td>
-                        <td class="w-10 text-center">
-                            <input name="check" type="checkbox">
+                        <td class="px-4 py-3">
+                            <input type="text" name="order_id" value="{{i[0]}}" style="background-color: #1a202c; color: white;">
                         </td>
-                    </tr>  
-                {% endfor %}
-                <thead>
-                    <tr>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Order_id</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Item_id</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Chef Assigned</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Waiter Assigned</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Total Bill</th>
-                        <th class="w-10 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tr rounded-br"></th>
+                        <td class="px-4 py-3">
+                            <input type="text" name="item_id" value="{{i[2]}}" style="background-color: #1a202c; color: white;">
+                        </td>
+                        <td>
+                            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" type="submit" value="Delete-{{i[0]}}-{{i[1]}}" name="submit">DELETE</button>
+                        </td>
+                        
                     </tr>
-                </thead>
-
-                <tr>
-                    <td class="px-4 py-3"><input type="text" name="order_id" value="{{order_id}}" size="10" STYLE="background-color: #2D3748; color: white;"></td>
-                    <td class="px-4 py-3 text-lg text-white">
-                        <select name="table_no" STYLE="background-color: #2D3748;">
-                            {% for i in show_tableinfo %}
-                                <option STYLE="background-color: #2D3748;">{{i[0]}} - {{i[1]}}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                    <td class="px-4 py-3 text-lg text-white">
-                        <select name="chef_id" STYLE="background-color: #2D3748;">
-                            {% for i in show_chefinfo %}
-                                <option STYLE="background-color: #2D3748;">{{i[1]}} - {{i[0]}}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                    <td class="px-4 py-3 text-lg text-white">
-                        <select name="waiter_id" STYLE="background-color: #2D3748;">
-                            {% for i in show_waiterinfo %}
-                                <option STYLE="background-color: #2D3748;">{{i[1]}} - {{i[0]}}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                    <td class="px-4 py-3"><input type="text" name="amount" size="10" STYLE="background-color: #2D3748; color: white;" value="AUTO"></td>
                     
-                </tr> 
-                
-                
-                
+                    {% endfor %}
+                        
             </tbody>
             </table>
-            <input type="submit" value="ADD THIS TO ORDER" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" name="ordersub"></button>
-        </form>
+        
         </div>
+    </form>
         <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0" href="/orderstable">Go To Orders
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-            </a>
-            <a href="/"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
+            <a href="/home"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
+        
         </div>
         </div>
+        <script type="text/javascript">
+            $(".chosen").chosen();
+        </script>
     </section>
+</body>

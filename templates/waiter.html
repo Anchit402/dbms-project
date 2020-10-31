@@ -1,11 +1,12 @@
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<body style="background-color: #1a202c;">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 <section class="text-gray-500 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">WAITERS TABLE</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">ENTER WAITER DETAILS</p>
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">WAITER TABLE</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">ENTER  OR REMOVE WAITER DETAILS</p>
         </div>
-        <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+        <div class="lg:w-2/3 w-full mx-auto overflow-auto" style="width: 100%;">
             <table class="table-auto w-full text-left whitespace-no-wrap">
             <thead>
                 <tr>
@@ -26,10 +27,9 @@
                         <td class="px-4 py-3"><input type="date" name="dob" STYLE="background-color: #2D3748; width: auto; color: white;"></td>
                         <td class="px-4 py-3"><input type="text" name="salary" size="10" STYLE="background-color: #2D3748; width: auto; color: white;" value="90000"></td>
                         <td class="px-4 py-3"><input type="tel" maxlength="10" minlength="10" name="contact" size="10" STYLE="background-color: #2D3748; width: auto; color: white;"></td>
-                        <td class="px-4 py-3"><input type="text" name="age" size="10" STYLE="background-color: #2D3748; width: 50px; color: white;" value="AUTO"></td>
-                        <input type="submit" value="ADD WAITER" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"></button>
+                        <button type="submit" name="submit" value="add" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">ADD WAITER</button>
                     </tr> 
-                </form>
+                
                 {% for i in iteminfo %}
                     <tr>
                         <td class="px-4 py-3 text-lg text-white">{{i[0]}}</td>
@@ -38,20 +38,21 @@
                         <td class="px-4 py-3 text-lg text-white">{{i[3]}}</td>
                         <td class="px-4 py-3 text-lg text-white">{{i[4]}}</td>
                         <td class="px-4 py-3 text-lg text-white">{{i[5]}}</td>
+                        <td>
+                            <button  name="submit" value="{{i[0]}}" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">DELETE</button>
+                        </td>
                     </tr>  
                 {% endfor %}
             </tbody>
             </table>
+        </form>
         </div>
         <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Got To Order_items
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-            </a>
-            <a href="/"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
+            <a href="/home"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
         </div>
         </div>
     </section>
 
 
+
+</body>

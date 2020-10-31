@@ -1,3 +1,6 @@
+<body style="background-color: #1a202c;">
+    
+
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 <section class="text-gray-500 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
@@ -10,6 +13,7 @@
             <thead>
                 <tr>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">chef_id</th>
+                <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800 rounded-tl rounded-bl">Date</th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">order_id</th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">Order_items</th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm bg-gray-800">quantity</th>
@@ -23,23 +27,16 @@
                         <td class="px-4 py-3" style="color: whitesmoke;">{{i[1]}}</td>
                         <td class="px-4 py-3" style="color: whitesmoke;">{{i[2]}}</td>
                         <td class="px-4 py-3" style="color: whitesmoke;">{{i[3]}}</td>
-                        <td class="w-10 text-center">
-                            <input name="plan" type="checkbox">
-                        </td>
+                        <td class="px-4 py-3" style="color: whitesmoke;">{{i[4]}}</td>
                     </tr>  
                 {% endfor %}
             </tbody>
             </table>
         </div>
         <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Got To Order_items
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-            </a>
-            <a href="/"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
+            <a href="/home"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
         </div>
         </div>
     </section>
-
+</body>
 

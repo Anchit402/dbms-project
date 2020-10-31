@@ -1,3 +1,5 @@
+<body style="background-color: #1a202c;">
+    
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 <section class="text-gray-500 bg-gray-900 body-font">
     <div class="container px-5 py-24 mx-auto">
@@ -19,23 +21,6 @@
                 </tr>
             </thead>
             <tbody>
-                <form action="", method="POST">
-                    <tr>
-                        <td class="px-4 py-3 text-lg text-white">
-                            <select name="order_id" STYLE="background-color: #2D3748;">
-                                {% for i in show_order_id %}
-                                    <option STYLE="background-color: #2D3748;">{{i[0]}}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td class="px-4 py-3"><input type="text" name="cust_name" STYLE="background-color: #2D3748; width: 150px; color: white;"></td>
-                        <td class="px-4 py-3"><input type="date" name="dob" STYLE="background-color: #2D3748; width: auto; color: white;"></td>
-                        <td class="px-4 py-3"><input type="number" name="rating" size="10" STYLE="background-color: #2D3748; width: 30px; color: white; text-align: center;" min="0" max="5" value="0"></td>
-                        <td class="px-4 py-3"><input type="text" name="review" size="10" STYLE="background-color: #2D3748; width: auto; color: white;"></td>
-                        <td class="px-4 py-3"><input type="tel" name="contact" maxlength="10" minlength="10" size="10" STYLE="background-color: #2D3748; width: 100px; color: white;"></td>
-                        <input type="submit" value="ADD FEEDBACK" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"></button>
-                    </tr> 
-                </form>
                 {% for i in iteminfo %}
                     <tr>
                         <td class="px-4 py-3 text-lg text-white">{{i[0]}}</td>
@@ -50,14 +35,10 @@
             </table>
         </div>
         <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
-            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Got To Order_items
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-            </a>
-            <a href="/"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
+            <a href="/home"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
         </div>
         </div>
     </section>
 
 
+</body>
