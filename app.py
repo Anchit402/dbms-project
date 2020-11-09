@@ -98,8 +98,8 @@ def postmenu():
         tableno = cur.fetchall()
         cur.execute('''SELECT itemname FROM items WHERE item_id IN (SELECT item_id FROM order_item WHERE order_id = "%s")''' % ('OI'+str(count_order[0])))
         vieworders = cur.fetchall()
-        return render_template('postmenu.html', iteminfo1 = iteminfo1, 
-        order_id = 'OI'+str(count_order[0]), item_names = item_names, tableno = tableno, vieworders = vieworders)
+        return render_template('postmenu.html', iteminfo1 = iteminfo1, order_id = 'OI'+str(count_order[0]), item_names = item_names,
+        tableno = tableno, vieworders = vieworders)
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     cur = mysql.connection.cursor()
@@ -120,7 +120,7 @@ def signup():
 @app.route('/itemtables', methods=['GET', 'POST'])
 def seeitemstable():
     cur = mysql.connection.cursor()
-    if(request.method == 'POST'):
+    if(request.method == 'POST' and request.form['submit'] == 'ADD ITEM'):
         item_id = 'I'+str(count_item[0])
         count_item[0] += 1
         itemname = request.form['Itemname']
@@ -130,6 +130,10 @@ def seeitemstable():
         cur.execute('''INSERT INTO items VALUES (%s, %s, %s, %s, %s)''', (item_id, itemname, price, itype, link))
         mysql.connection.commit()
         cur.close()
+        return redirect('/itemtables')
+    elif(request.method == 'POST' and request.form['submit'] != 'ADD ITEM'):
+        cur.execute('''DELETE FROM items WHERE item_id = "%s"''' % request.form['submit'])
+        mysql.connection.commit()
         return redirect('/itemtables')
     else:
         results = cur.execute('''SELECT * FROM items ORDER BY type DESC''')
@@ -181,13 +185,17 @@ def orderitems():
 @app.route('/tablestables', methods=['GET', 'POST'])
 def seetablestables():
     cur = mysql.connection.cursor()
-    if(request.method == 'POST'):
+    if(request.method == 'POST' and request.form['submit'] == 'ADD TABLE'):
         table_no = 'T'+str(count_table[0])
         count_table[0] += 1
         seat_capacity = request.form['seat_capacity']
         cur.execute('''INSERT INTO tables VALUES (%s, %s)''', (table_no, seat_capacity))
         mysql.connection.commit()
         cur.close()
+        return redirect('/tablestables')
+    elif(request.method == 'POST' and request.form['submit'] != 'ADD TABLE'):
+        cur.execute('''DELETE FROM tables WHERE table_no = "%s"''' % (request.form['submit']))
+        mysql.connection.commit()
         return redirect('/tablestables')
     else:
         results = cur.execute('''SELECT * FROM tables''')

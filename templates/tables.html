@@ -19,20 +19,21 @@
                     <tr>
                         <td class="px-4 py-3"><input type="text" name="table_no" size="10" STYLE="background-color: #2D3748; color: white;" value="{{table_no}}"></td>
                         <td class="px-4 py-3"><input type="number" name="seat_capacity" size="10" STYLE="background-color: #2D3748; color: white;" min="1" value="1"></td>
-                        <input type="submit" value="ADD TABLE" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"></button>
+                        <button type="submit" name="submit" value="ADD TABLE" button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">ADD TABLE</button>
                     </tr> 
-                </form>
+                
                 {% for i in iteminfo %}
                     <tr>
                         <td class="px-4 py-3" STYLE="background-color: #2D3748; color: white;">{{i[0]}}</td>
                         <td class="px-4 py-3" STYLE="background-color: #2D3748; color: white;">{{i[1]}}</td>
-                        <td class="w-10 text-center">
-                            <input name="plan" type="radio">
-                        </td>
+                        <td><button name="submit" value="{{i[0]}}" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                            DELETE
+                        </button></td>
                     </tr>  
                 {% endfor %}
             </tbody>
             </table>
+        </form>
         </div>
         <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
             <a href="/home"><button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">HOME</button></a>
