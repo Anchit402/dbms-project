@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 import datetime
 import yaml
-
+#some change
 app = Flask(__name__)
 
 db = yaml.load(open('db.yaml'))
