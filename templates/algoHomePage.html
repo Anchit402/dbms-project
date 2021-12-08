@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Poppins:wght@300;400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet"
+			integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='style1.css')}}"
+			type="text/css"
+		/>
+
+		<title>Welcome to Tarama! Most Favourite Restaurant in Vellore</title>
+	</head>
+
+	<body>
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a
+				style="
+					font-size: 33px;
+					color: white;
+					font-family: 'Berkshire Swash', cursive;
+				"
+				href="/algoHomePage"
+				>Home</a
+			>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav ml-auto mr-5">
+					<a
+						class="nav-item nav-link active ml-2"
+						href="#home-section"
+						style="
+							font-weight: 500;
+							color: #e1e6e1;
+							font-family: 'Poppins', sans-serif;
+						"
+						>PROBLEM EARLIER<span class="sr-only">(current)</span></a
+					>
+					<a
+						class="nav-item nav-link ml-2"
+						href="#problemEarly"
+						style="
+							font-weight: 500;
+							color: #e1e6e1;
+							font-family: 'Poppins', sans-serif;
+						"
+						>BUT NOW</a
+					>
+					<a
+						class="nav-item nav-link ml-2"
+						href="/fillinsidetarama"
+						style="
+							font-weight: 500;
+							color: #000;
+							font-family: 'Poppins', sans-serif;
+						"
+						>START</a
+					>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Home Section -->
+
+		<section id="home-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="mainHeading">Welcome to Hakuna Matata</div>
+						<div class="subHeading">Most favoured Restaurant in Vellore</div>
+
+						<div class="VITOffer">Exciting offers for VIT people!</div>
+
+						<div>
+							<a
+								href="/fillinsidetarama"
+								class="btn btn-primary btn-lg getStarted"
+								>Get Started</a
+							>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<img
+							src="/static/img/home.png"
+							alt="friends eating pizza"
+							srcset=""
+							height="400px"
+							width="600px"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Problem Earlier -->
+
+		<section id="problemEarly">
+			<div class="sectionHeading">Problem Earlier...</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 storyFont">
+						Unfortunately we have only 30 seats which used to get filled early.
+						<p class="mt-3">
+							<strong>And please don't ask about afternoons & Sundays 😰</strong
+							><br /><br />
+							We were so tired ourselves of managing this long queue
+						</p>
+					</div>
+					<div class="col-sm-6">
+						<img
+							src="/static/img/insideTarama.png"
+							alt=""
+							srcset=""
+							height="350px"
+							width="600px"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Our Features -->
+
+		<section id="features">
+			<div class="sectionHeading">But Now!</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 storyFont">
+						With &nbsp;
+						<span style="font-size: 2rem; font-family: 'Berkshire Swash'"
+							>OUR</span
+						>
+						&nbsp; project
+						<p class="mt-3">
+							<strong>No more waiting in queues!</strong><br /><br />
+							<span style="font-size: 1.3rem"
+								>With the combination of several scheduling Algo. you'll never
+								imagine a better service from any other restaurant.
+							</span>
+						</p>
+					</div>
+					<div class="col-sm-6">
+						<img
+							src="/static/img/insideTarama.png"
+							alt=""
+							srcset=""
+							height="350px"
+							width="600px"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+
+	<script
+		src="https://use.fontawesome.com/releases/v5.13.1/js/all.js"
+		data-auto-replace-svg="nest"
+	></script>
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"
+	></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"
+	></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"
+	></script>
+</html>
